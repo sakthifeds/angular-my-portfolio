@@ -1,0 +1,50 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Angular application
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: List build output
+        run: |
+          echo "Build output directory structure:"
+          find dist -type f -name "*.html" | head -5 || true
+          ls -la dist/ || true
+
+      - name: Trigger Render deployment via Webhook
+        if: ${{ secrets.RENDER_WEBHOOK_URL != '' }}
+        run: |
+          curl -X POST "${{ secrets.RENDER_WEBHOOK_URL }}"
+
+      - name: Trigger Render deployment via API
+        if: ${{ secrets.RENDER_WEBHOOK_URL == '' && secrets.RENDER_API_KEY != '' }}
+        run: |
+          curl -X POST \
+            "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"clearCache": "do_not_clear"}' || echo "API deployment triggered"

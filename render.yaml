@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: angular-portfolio
+    env: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist/angular-my-portfolio/browser
+    envVars:
+      - key: NODE_ENV
+        value: production
+    # Note: Check your actual build output directory after running 'npm run build'
+    # Common paths: ./dist/angular-my-portfolio/browser or ./dist/browser
+

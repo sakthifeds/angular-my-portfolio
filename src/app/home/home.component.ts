@@ -28,6 +28,14 @@ interface Achievement {
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  readonly personalInfo = {
+    name: 'Sakthi Ramachandran',
+    title: 'Technical Lead – UI Development | Front-End Engineering & People Leadership',
+    phone: '+32 471 946 260',
+    email: 'sakthi.ramji@hotmail.com',
+    location: 'Brussels, Belgium'
+  };
+
   readonly professionalSummary = {
     title: 'Front-End Technical Lead',
     experience: '13+ years',
@@ -82,6 +90,32 @@ export class HomeComponent {
         'Coordinated with regional backend teams to integrate APIs supporting financial data, transactions, and localization.',
         'Delivered Angular-based applications for 14 countries across APAC and EMEA.',
         'Partnered with UX designers and business analysts to ensure consistency and compliance with regional standards.'
+      ]
+    },
+    {
+      title: 'UI Developer',
+      company: 'Citi Banamex',
+      employment: 'employed via Tata Consultancy Services',
+      period: '10/2015 - 06/2019',
+      location: 'Mexico City, Mexico',
+      description: 'Major retail and corporate bank in Mexico (Citigroup subsidiary)',
+      responsibilities: [
+        'Developed next-generation online banking systems using Angular and integrated with RESTful APIs for account management and payments.',
+        'Migrated legacy JSP applications into Angular single-page applications (SPAs).',
+        'Built and maintained shared components and utilities used across multiple digital banking teams.',
+        'Worked onsite in Mexico City, coordinating directly with local backend and product teams to deliver full-stack functionality.'
+      ]
+    },
+    {
+      title: 'UI Developer',
+      company: 'Citi Bank USA',
+      employment: 'employed via Tata Consultancy Services',
+      period: '04/2012 - 10/2015',
+      location: 'Chennai, India',
+      description: 'Leading U.S. financial institution offering global consumer and corporate banking',
+      responsibilities: [
+        'Built responsive web interfaces using jQuery, HTML, CSS, and AJAX.',
+        'Performed accessibility testing using FireEyes and JAWS tools.'
       ]
     }
   ];

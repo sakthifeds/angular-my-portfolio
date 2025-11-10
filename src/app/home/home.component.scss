@@ -37,24 +37,62 @@
   text-align: center;
 }
 
-.hero-title {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.hero-header {
   margin-bottom: 2rem;
 }
 
-.title-main {
+.hero-name {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
+  margin: 0 0 0.75rem 0;
 }
 
-.title-experience {
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+.hero-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
   font-weight: 400;
-  opacity: 0.9;
+  opacity: 0.95;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.hero-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  svg {
+    flex-shrink: 0;
+    opacity: 0.9;
+  }
+
+  span {
+    white-space: nowrap;
+  }
+}
+
+.hero-summary {
+  margin-top: 2rem;
 }
 
 .hero-description {
@@ -343,6 +381,20 @@
 @media screen and (max-width: 480px) {
   .container {
     padding: 0 1rem;
+  }
+
+  .hero {
+    padding: 3rem 0 4rem;
+  }
+
+  .hero-contact {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .contact-item {
+    font-size: 0.875rem;
   }
 
   .hero-description {
