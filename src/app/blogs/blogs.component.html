@@ -1,0 +1,78 @@
+<section class="blogs-section" aria-labelledby="blogs-heading">
+  <div class="container">
+    <header class="blogs-header">
+      <h1 id="blogs-heading" class="blogs-title">Blog</h1>
+      <p class="blogs-subtitle">Thoughts, tutorials, and insights on front-end development, Angular, and web technologies</p>
+    </header>
+
+    @if (publishedPosts.length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon" aria-hidden="true">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" fill="currentColor"/>
+          </svg>
+        </div>
+        <h2 class="empty-title">Coming Soon</h2>
+        <p class="empty-description">
+          I'm currently working on some exciting blog posts about Angular, web accessibility, 
+          front-end architecture, and more. Check back soon for new content!
+        </p>
+      </div>
+    } @else {
+      <div class="blogs-content">
+        @if (getCategories().length > 0) {
+          <nav class="category-filter" aria-label="Filter blogs by category">
+            <button 
+              class="filter-btn active" 
+              (click)="selectedCategory = ''"
+              [attr.aria-pressed]="selectedCategory === ''"
+            >
+              All
+            </button>
+            @for (category of getCategories(); track category) {
+              <button 
+                class="filter-btn" 
+                (click)="selectedCategory = category"
+                [attr.aria-pressed]="selectedCategory === category"
+              >
+                {{ category }}
+              </button>
+            }
+          </nav>
+        }
+
+        <div class="blogs-grid">
+          @for (post of (selectedCategory ? getPostsByCategory(selectedCategory) : publishedPosts); track post.id) {
+            <article class="blog-card" [attr.aria-labelledby]="'blog-' + post.id">
+              <div class="blog-card-header">
+                <span class="blog-category" [attr.aria-label]="'Category: ' + post.category">
+                  {{ post.category }}
+                </span>
+                <span class="blog-read-time" aria-label="Reading time">{{ post.readTime }}</span>
+              </div>
+              <h2 class="blog-title" [id]="'blog-' + post.id">
+                <a [routerLink]="['/blogs', post.id]" class="blog-link">
+                  {{ post.title }}
+                </a>
+              </h2>
+              <p class="blog-excerpt">{{ post.excerpt }}</p>
+              <div class="blog-footer">
+                <time class="blog-date" [attr.datetime]="post.date">
+                  {{ formatDate(post.date) }}
+                </time>
+                @if (post.tags.length > 0) {
+                  <div class="blog-tags">
+                    @for (tag of post.tags; track tag) {
+                      <span class="blog-tag" [attr.aria-label]="'Tag: ' + tag">{{ tag }}</span>
+                    }
+                  </div>
+                }
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>
+

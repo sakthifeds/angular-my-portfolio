@@ -1,12 +1,16 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [CommonModule, RouterModule, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('angular-my-portfolio');
+  readonly navItems = [
+    { label: 'Home', route: '/home' },
+    { label: 'Blogs', route: '/blogs' }
+  ];
 }

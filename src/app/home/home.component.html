@@ -1,0 +1,86 @@
+<!-- Hero Section -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero-content">
+      <h1 id="hero-title" class="hero-title">
+        <span class="title-main">{{ professionalSummary.title }}</span>
+        <span class="title-experience">{{ professionalSummary.experience }} of Experience</span>
+      </h1>
+      <div class="hero-description">
+        @for (paragraph of professionalSummary.description; track $index) {
+          <p>{{ paragraph }}</p>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Professional Experience Section -->
+<section class="experience-section" aria-labelledby="experience-heading">
+  <div class="container">
+    <h2 id="experience-heading" class="section-title">Professional Experience</h2>
+    <div class="experience-list">
+      @for (exp of experiences; track exp.company + exp.period) {
+        <article class="experience-card" [attr.aria-labelledby]="'exp-' + $index">
+          <header class="experience-header">
+            <div class="experience-title-row">
+              <h3 class="experience-title" [id]="'exp-' + $index">{{ exp.title }}</h3>
+              <span class="experience-period" aria-label="Employment period">{{ exp.period }}</span>
+            </div>
+            <div class="experience-company">
+              <span class="company-name">{{ exp.company }}</span>
+              <span class="employment-type" aria-label="Employment type">{{ exp.employment }}</span>
+            </div>
+            <div class="experience-location" aria-label="Location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+              </svg>
+              <span>{{ exp.location }}</span>
+            </div>
+          </header>
+          <p class="experience-description">{{ exp.description }}</p>
+          <ul class="responsibilities-list" role="list">
+            @for (responsibility of exp.responsibilities; track responsibility) {
+              <li role="listitem">{{ responsibility }}</li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Technical Skills Section -->
+<section class="skills-section" aria-labelledby="skills-heading">
+  <div class="container">
+    <h2 id="skills-heading" class="section-title">Technical Skills</h2>
+    <div class="skills-grid">
+      @for (category of getCategories(); track category) {
+        <div class="skill-category">
+          <h3 class="category-title">{{ category }}</h3>
+          <div class="skill-tags">
+            @for (skill of getSkillsByCategory(category); track skill.name) {
+              <span class="skill-tag" [attr.aria-label]="skill.name + ' skill'">{{ skill.name }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Key Achievements Section -->
+<section class="achievements-section" aria-labelledby="achievements-heading">
+  <div class="container">
+    <h2 id="achievements-heading" class="section-title">Key Achievements</h2>
+    <div class="achievements-grid">
+      @for (achievement of achievements; track achievement.title) {
+        <article class="achievement-card" [attr.aria-labelledby]="'achievement-' + $index">
+          <h3 class="achievement-title" [id]="'achievement-' + $index">{{ achievement.title }}</h3>
+          <p class="achievement-description">{{ achievement.description }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
